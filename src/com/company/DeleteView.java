@@ -35,8 +35,8 @@ public class DeleteView {
         deleteButton3.setBounds(20, higthAligment + 110, 300, 20);
         jDialog.add(deleteButton3);
 
-       // deleteButton3.addActionListener(new ListenerFirst(this, dataBaseManipulation));
-      //  deleteButton2.addActionListener(new ListenerSecond(this, dataBaseManipulation));
+        deleteButton3.addActionListener(new DeleteByNameAndNumberOfWorkListener(this, dataBaseManipulation));
+        deleteButton2.addActionListener(new DeleteByNameAndWorkListener(this, dataBaseManipulation));
         deleteButton1.addActionListener(new DeleteByNameAndGroupListener(this, dataBaseManipulation));
     }
 

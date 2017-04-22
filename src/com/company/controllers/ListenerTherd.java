@@ -58,7 +58,7 @@ public class ListenerTherd implements ActionListener {
                 findView.getjDialog().remove(textField);
                 findView.getjDialog().remove(jButton);
                 Table table = new Table(findView.getjDialog());
-                table.renderTable(dataBaseManipulation.findStidentByNameAndNumberOfWork(firstData.getText(),secondData.getText(),textField.getText()));
+                table.renderTable(dataBaseManipulation.findStudentByNameAndNumberOfWork(firstData.getText(),secondData.getText(),textField.getText()));
                 findView.getjDialog().update(findView.getjDialog().getGraphics());
             }
         });

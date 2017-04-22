@@ -1,15 +1,12 @@
 package com.company;
 
 import com.company.controllers.DataBaseManipulation;
-import com.company.model.Student;
 import com.company.model.StudentBase;
 import com.company.model.Table;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Created by alex o n 11.04.2017.
@@ -68,7 +65,6 @@ public class View {
 
     private void creatingTolbar() {
         JToolBar toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
-
         findButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 new FindView(dataBaseManipulation);
@@ -90,7 +86,7 @@ public class View {
         jFrame.getContentPane().setLayout(null);
         toolbar.setBounds(0,0,1600,50);
         jFrame.add(toolbar);
-        createTable();
+        renderTable();
         jFrame.update(jFrame.getGraphics());
         JToolBar jToolBarSecond = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
         leftButton.addActionListener(new ActionListener() {
@@ -127,39 +123,13 @@ public class View {
         jToolBarSecond.setBounds(800,800,1600,30);
         jFrame.add(toolbar);
         jFrame.add(jToolBarSecond);
-        createTable();
+        renderTable();
         jFrame.update(jFrame.getGraphics());
         //jFrame.getContentPane().setLayout(null);
     }
 
 
-
-   public void createTable(){
+   public void renderTable(){
        table.renderTable(studentBase.getStudents());
-     //   table.renderTable(studentBase.getStudents());
-      /*  JLabel ekz2 = new JLabel("2");
-        ekz2.setBounds(380,30,160,20);
-        jFrame.add(ekz2);
-        JLabel ekz3 = new JLabel("3");
-        ekz3.setBounds(540,30,160,20);
-        jFrame.add(ekz3);
-        JLabel nameekz1 = new JLabel("наименование");
-        nameekz1.setBounds(220,50,100,20);
-        jFrame.add(nameekz1);
-        JLabel markekz1 = new JLabel("отметка");
-        markekz1.setBounds(320,50,60,20);
-        jFrame.add(markekz1);
-        JLabel nameekz2 = new JLabel("наименование");
-        nameekz2.setBounds(380,50,100,20);
-        jFrame.add(nameekz2);
-        JLabel markekz2 = new JLabel("отметка");
-        markekz2.setBounds(480,50,60,20);
-        jFrame.add(markekz2);
-        JLabel nameekz3 = new JLabel("наименование");
-        nameekz3.setBounds(540,50,100,20);
-        jFrame.add(nameekz3);
-        JLabel markekz3 = new JLabel("отметка");
-        markekz3.setBounds(640,50,60,20);
-        jFrame.add(markekz3);*/
     }
 }

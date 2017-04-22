@@ -11,15 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.company.FindView;
-import com.company.model.Table;
-
-import javax.swing.*;
-import javax.xml.soap.Text;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 /**
  * Created by alex o n 22.04.2017.
  */
@@ -58,7 +49,7 @@ public class ListenerSecond implements ActionListener {
                 findView.getjDialog().remove(secondData);
                 findView.getjDialog().remove(jButton);
                 Table table = new Table(findView.getjDialog());
-                table.renderTable(dataBaseManipulation.findStidentByNameAndWork(firstData.getText(),secondData.getText()));
+                table.renderTable(dataBaseManipulation.findStudentByNameAndWork(firstData.getText(),secondData.getText()));
                 findView.getjDialog().update(findView.getjDialog().getGraphics());
             }
         });

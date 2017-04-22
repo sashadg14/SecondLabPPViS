@@ -29,11 +29,11 @@ public class DataBaseManipulation {
         }
         newStudent.setPublicWork(publicWorks);
         studentBase.addStudent(newStudent);
-        view.createTable();
+        view.renderTable();
         System.out.println(studentBase.getStudents().get(0).getGroup()+" ------");
     }
 
-    public ArrayList<Student> findStidentByNameAndGrop(String name, String group){
+    public ArrayList<Student> findStudentByNameAndGrop(String name, String group){
         ArrayList<Student> findStudentArrayList = new ArrayList<Student>();
         for(Student student: studentBase.getStudents()){
             if(student.getGroup().equalsIgnoreCase(group)&&student.getFirstName().equalsIgnoreCase(name))
@@ -44,7 +44,7 @@ public class DataBaseManipulation {
         return  findStudentArrayList;
     }
 
-    public ArrayList<Student> findStidentByNameAndWork(String name, String studWork){
+    public ArrayList<Student> findStudentByNameAndWork(String name, String studWork){
         ArrayList<Student> findStudentArrayList = new ArrayList<Student>();
         for(Student student: studentBase.getStudents()){
             if(student.getFirstName().equalsIgnoreCase(name))
@@ -60,7 +60,7 @@ public class DataBaseManipulation {
         return  findStudentArrayList;
     }
 
-    public ArrayList<Student> findStidentByNameAndNumberOfWork(String name, String lowerLimit, String upperLimit){
+    public ArrayList<Student> findStudentByNameAndNumberOfWork(String name, String lowerLimit, String upperLimit){
         ArrayList<Student> findStudentArrayList = new ArrayList<Student>();
         for(Student student: studentBase.getStudents()){
             if(student.getFirstName().equalsIgnoreCase(name))
@@ -83,7 +83,16 @@ public class DataBaseManipulation {
         return  findStudentArrayList;
     }
 
-    public void deleteStidentByNameAndGrop(String name,String group){
-        studentBase.removeStudents(findStidentByNameAndGrop(name,group));
+    public void deleteStudentByNameAndGrop(String name, String group){
+        studentBase.removeStudents(findStudentByNameAndGrop(name,group));
+        view.renderTable();
+    }
+    public void deleteStudentByNameAndWork(String name, String group){
+        studentBase.removeStudents(findStudentByNameAndWork(name,group));
+        view.renderTable();
+    }
+    public void deleteStudentByNameAndNumberOfWork(String name, String lowerLimit,String upperLimit){
+        studentBase.removeStudents(findStudentByNameAndNumberOfWork(name,lowerLimit,upperLimit));
+        view.renderTable();
     }
 }

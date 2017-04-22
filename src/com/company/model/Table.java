@@ -24,24 +24,31 @@ public class Table {
     }
 
     public void renderTable(ArrayList<Student> studentArrayList) {
+        for(Component component:componentArrayList){
+            window.remove(component);
+        }
+        componentArrayList.clear();
         fio= new JLabel("ФИО");
         fio.setBounds(0,50,widh,heigth*2);
         fio.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         fio.setHorizontalAlignment(JLabel.CENTER);
         fio.setVerticalAlignment(JLabel.CENTER);
         window.add(fio);
+        componentArrayList.add(fio);
         group= new JLabel("Группа");
         group.setBounds(widh,50,widh,heigth*2);
         group.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         group.setHorizontalAlignment(JLabel.CENTER);
         group.setVerticalAlignment(JLabel.CENTER);
         window.add(group);
+        componentArrayList.add(group);
         publicWorsk= new JLabel("Общественные работы");
         publicWorsk.setBounds(widh*2,50,widh*10,heigth);
         publicWorsk.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
         publicWorsk.setHorizontalAlignment(JLabel.CENTER);
         publicWorsk.setVerticalAlignment(JLabel.CENTER);
         window.add(publicWorsk);
+        componentArrayList.add(publicWorsk);
         for(int i=0;i<10;i++){
             jLable[i] = new JLabel(Integer.toString(1+i)+" семестр");
             window.remove(jLable[i]);
@@ -55,16 +62,6 @@ public class Table {
             createRow(student,studentArrayList);
         }
         window.update(window.getGraphics());
-        window.remove(fio);
-        window.remove(group);
-        window.remove(publicWorsk);
-        for(int i=0;i<10;i++){
-            window.remove(jLable[i]);
-        }
-        for(Component component:componentArrayList){
-            window.remove(component);
-        }
-        componentArrayList.clear();
         // System.out.println(studentArrayList.get(0).getGroup()+" ------");
 
     }

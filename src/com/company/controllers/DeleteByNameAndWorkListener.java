@@ -8,12 +8,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by alex o n 22.04.2017.
+ * Created by alex o n 23.04.2017.
  */
-public class DeleteByNameAndGroupListener implements ActionListener{
+public class DeleteByNameAndWorkListener implements ActionListener {
     DeleteView deleteView;
     DataBaseManipulation dataBaseManipulation;
-    public DeleteByNameAndGroupListener(DeleteView deleteView, DataBaseManipulation dataBaseManipulation){
+    public DeleteByNameAndWorkListener(DeleteView deleteView, DataBaseManipulation dataBaseManipulation){
         this.deleteView=deleteView;
         this.dataBaseManipulation=dataBaseManipulation;
     }
@@ -23,15 +23,15 @@ public class DeleteByNameAndGroupListener implements ActionListener{
         int heigth=20;
         int width=100;
         deleteView.removeBottons();
-        final JLabel jLabel=new JLabel("Введите фамилию студента и группу");
+        final JLabel jLabel=new JLabel("Введите фамилию студента и вид работы");
         jLabel.setBounds(20,higthAligment-40,300,20);
         deleteView.getjDialog().add(jLabel);
         final TextField name = new TextField();
         name.setBounds(20,higthAligment,width,heigth);
         deleteView.getjDialog().add(name);
-        final TextField group = new TextField();
-        group.setBounds(140, higthAligment,width,heigth);
-        deleteView.getjDialog().add(group);
+        final TextField work = new TextField();
+        work.setBounds(140, higthAligment,width,heigth);
+        deleteView.getjDialog().add(work);
         final JButton jButton = new JButton("Удаление");
         jButton.setBounds(70,higthAligment+40,80,20);
         deleteView.getjDialog().add(jButton);
@@ -39,10 +39,10 @@ public class DeleteByNameAndGroupListener implements ActionListener{
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                dataBaseManipulation.deleteStudentByNameAndGrop(name.getText(),group.getText());
+                dataBaseManipulation.deleteStudentByNameAndWork(name.getText(),work.getText());
                 deleteView.getjDialog().setVisible(false);
-
             }
         });
     }
 }
+
