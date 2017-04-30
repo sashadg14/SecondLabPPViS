@@ -1,6 +1,9 @@
 package com.company;
 
 import com.company.controllers.*;
+import com.company.listners.DeleteByNameAndGroupListener;
+import com.company.listners.DeleteByNameAndNumberOfWorkListener;
+import com.company.listners.DeleteByNameAndWorkListener;
 
 import javax.swing.*;
 

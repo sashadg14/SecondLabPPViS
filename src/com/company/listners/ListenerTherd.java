@@ -1,7 +1,10 @@
-package com.company.controllers;
+package com.company.listners;
 
 import com.company.FindView;
+import com.company.controllers.DataBaseManipulation;
+import com.company.controllers.PageManipulator;
 import com.company.model.Table;
+import com.company.ToolbarForTableControl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -58,7 +61,10 @@ public class ListenerTherd implements ActionListener {
                 findView.getjDialog().remove(textField);
                 findView.getjDialog().remove(jButton);
                 Table table = new Table(findView.getjDialog());
-                table.renderTable(dataBaseManipulation.findStudentByNameAndNumberOfWork(firstData.getText(),secondData.getText(),textField.getText()));
+                PageManipulator pageManipulator=new PageManipulator(dataBaseManipulation.findStudentByNameAndNumberOfWork(firstData.getText(),secondData.getText(),textField.getText()),table);
+                ToolbarForTableControl toolbarForTableControl=new ToolbarForTableControl(700,500,pageManipulator,findView.getjDialog(),table);
+                table.setToolbarForTableControl(toolbarForTableControl);
+                table.renderTable(pageManipulator.returnPageOfStudents());
                 findView.getjDialog().update(findView.getjDialog().getGraphics());
             }
         });

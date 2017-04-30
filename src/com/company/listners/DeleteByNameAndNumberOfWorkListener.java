@@ -1,7 +1,7 @@
-package com.company.controllers;
+package com.company.listners;
 
 import com.company.DeleteView;
-import com.company.model.Table;
+import com.company.controllers.DataBaseManipulation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,8 +49,13 @@ public class DeleteByNameAndNumberOfWorkListener implements ActionListener {
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                dataBaseManipulation.deleteStudentByNameAndNumberOfWork(name.getText(),lowerLimit.getText(),upperLimit.getText());
+                int count=dataBaseManipulation.findStudentByNameAndNumberOfWork(name.getText(),lowerLimit.getText(),upperLimit.getText()).size();
                 deleteView.getjDialog().setVisible(false);
+                if (count!=0){
+                    JOptionPane.showMessageDialog(new JFrame(), "Записей найдено и удалено "+count);
+                    dataBaseManipulation.deleteStudentByNameAndNumberOfWork(name.getText(),lowerLimit.getText(),upperLimit.getText());
+                }
+                else JOptionPane.showMessageDialog(new JFrame(), "Записей не найдено");
             }
         });
     }

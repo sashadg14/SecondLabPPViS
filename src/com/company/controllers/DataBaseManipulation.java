@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class DataBaseManipulation {
     StudentBase studentBase;
     View view;
+
     public DataBaseManipulation(StudentBase studentBase, View view){
         this.studentBase=studentBase;
         this.view= view;
@@ -20,7 +21,7 @@ public class DataBaseManipulation {
     public void AddNewStudentInBase(AddView addView){
         Student newStudent= new Student();
         newStudent.setFirstName(addView.getFistNameField().getText());
-        newStudent.setSurName(addView.getSurNameField().getText());
+        newStudent.setMiddleName(addView.getSurNameField().getText());
         newStudent.setLastName(addView.getLastNameField().getText());
         newStudent.setGroup(addView.getGroupField().getText());
         ArrayList<String> publicWorks= new ArrayList<String>();
@@ -82,7 +83,6 @@ public class DataBaseManipulation {
         }
         return  findStudentArrayList;
     }
-
     public void deleteStudentByNameAndGrop(String name, String group){
         studentBase.removeStudents(findStudentByNameAndGrop(name,group));
         view.renderTable();
@@ -95,4 +95,5 @@ public class DataBaseManipulation {
         studentBase.removeStudents(findStudentByNameAndNumberOfWork(name,lowerLimit,upperLimit));
         view.renderTable();
     }
+
 }

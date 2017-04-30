@@ -70,7 +70,7 @@ public class AddView {
         publicWork.setBounds(175, heigth*6,150,20);
         jDialog.add(publicWork);
         JButton jButton = new JButton("Добавить");
-        jButton.setBounds(300,300,80,40);
+        jButton.setBounds(300,300,100,40);
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {

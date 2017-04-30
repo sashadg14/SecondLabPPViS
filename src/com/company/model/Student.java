@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Created by alex o n 11.04.2017.
  */
 public class Student {
-    String firstName;
-    String lastName;
-    String surName;
-    String group;
+    String firstName="";
+    String lastName="";
+    String middleName="";
+    String group="";
     ArrayList<String> publicWork;
 
     public Student(){
@@ -34,8 +34,8 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public void setSurName(String surName) {
-        this.surName = surName;
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
     }
 
     public void setPublicWork(ArrayList<String> publicWork) {
@@ -50,8 +50,8 @@ public class Student {
         return lastName;
     }
 
-    public String getSurName() {
-        return surName;
+    public String getMiddleName() {
+        return middleName;
     }
 
     public ArrayList<String> getPublicWork() {

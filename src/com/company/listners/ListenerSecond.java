@@ -1,10 +1,13 @@
-package com.company.controllers;
+package com.company.listners;
 /**
  * Created by alex o n 22.04.2017.
  */
 
 import com.company.FindView;
+import com.company.controllers.DataBaseManipulation;
+import com.company.controllers.PageManipulator;
 import com.company.model.Table;
+import com.company.ToolbarForTableControl;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +52,10 @@ public class ListenerSecond implements ActionListener {
                 findView.getjDialog().remove(secondData);
                 findView.getjDialog().remove(jButton);
                 Table table = new Table(findView.getjDialog());
-                table.renderTable(dataBaseManipulation.findStudentByNameAndWork(firstData.getText(),secondData.getText()));
+                PageManipulator pageManipulator=new PageManipulator(dataBaseManipulation.findStudentByNameAndWork(firstData.getText(),secondData.getText()),table);
+                ToolbarForTableControl toolbarForTableControl= new ToolbarForTableControl(700,500,pageManipulator,findView.getjDialog(),table);
+                table.setToolbarForTableControl(toolbarForTableControl);
+                table.renderTable(pageManipulator.returnPageOfStudents());
                 findView.getjDialog().update(findView.getjDialog().getGraphics());
             }
         });

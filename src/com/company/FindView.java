@@ -1,16 +1,11 @@
 package com.company;
 
 import com.company.controllers.DataBaseManipulation;
-import com.company.controllers.ListenerFirst;
-import com.company.controllers.ListenerSecond;
-import com.company.controllers.ListenerTherd;
-import com.company.model.Table;
+import com.company.listners.ListenerFirst;
+import com.company.listners.ListenerSecond;
+import com.company.listners.ListenerTherd;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Created by alex o n 11.04.2017.

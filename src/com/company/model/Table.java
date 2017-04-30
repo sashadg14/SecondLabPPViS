@@ -1,5 +1,7 @@
 package com.company.model;
 
+import com.company.ToolbarForTableControl;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,16 +19,22 @@ public class Table {
     JLabel publicWorsk;
     JLabel[] jLable;
     ArrayList<Component> componentArrayList;
+    ToolbarForTableControl toolbarForTableControl;
     public Table(Window window){
         componentArrayList=new ArrayList<Component>();
         this.window=window;
         jLable= new JLabel[10];
     }
 
+    public void setToolbarForTableControl(ToolbarForTableControl toolbarForTableControl) {
+        this.toolbarForTableControl = toolbarForTableControl;
+    }
+
     public void renderTable(ArrayList<Student> studentArrayList) {
         for(Component component:componentArrayList){
             window.remove(component);
         }
+
         componentArrayList.clear();
         fio= new JLabel("ФИО");
         fio.setBounds(0,50,widh,heigth*2);
@@ -61,13 +69,14 @@ public class Table {
         for(Student student: studentArrayList){
             createRow(student,studentArrayList);
         }
+        toolbarForTableControl.createJLable();
         window.update(window.getGraphics());
         // System.out.println(studentArrayList.get(0).getGroup()+" ------");
 
     }
 
    void createRow(Student student, ArrayList<Student> studentArrayList){
-       JLabel name = new JLabel(" "+student.getFirstName()+" "+student.getSurName()+" "+student.getLastName());
+       JLabel name = new JLabel(" "+student.getFirstName()+" "+student.getMiddleName()+" "+student.getLastName());
        name.setBounds(0,90+(heigth*studentArrayList.indexOf(student)),widh,heigth);
        //System.out.println(name.getY()+"----");
        name.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));

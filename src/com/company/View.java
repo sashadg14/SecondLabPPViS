@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.controllers.DataBaseManipulation;
+import com.company.controllers.PageManipulator;
 import com.company.model.StudentBase;
 import com.company.model.Table;
 
@@ -17,20 +18,24 @@ public class View {
     JButton findButton;
     JButton addButton;
     JButton deleteButton;
-    JButton leftButton;
-    JButton rightButton;
-   JButton leftButtonToEnd;
-    JButton rightButtonToEnd;
+    JButton saveButton;
+    JButton loadButton;
+
     Table table;
     StudentBase studentBase;
     DataBaseManipulation dataBaseManipulation;
+    PageManipulator pageManipulator;
+    ToolbarForTableControl toolbarForTableControl;
    public View(){
        jFrame= new JFrame();
-
+       jFrame.getContentPane().setLayout(null);
        studentBase= new StudentBase();
-        dataBaseManipulation= new DataBaseManipulation(studentBase,this);
-        JLabel JLABLE = new JLabel();
-        table= new Table(jFrame);
+       dataBaseManipulation= new DataBaseManipulation(studentBase,this);
+       JLabel JLABLE = new JLabel();
+       table= new Table(jFrame);
+       pageManipulator=new PageManipulator(studentBase.getStudents(),table);
+       toolbarForTableControl=new ToolbarForTableControl(700,700,pageManipulator,jFrame,table);
+       table.setToolbarForTableControl(toolbarForTableControl);
        JLABLE.setBounds(0,0,1600,900);
         jFrame.add(JLABLE);
        jFrame.setSize(1000,800);
@@ -38,20 +43,15 @@ public class View {
        findButton = new JButton();
        addButton = new JButton();
         deleteButton = new JButton();
+        saveButton=new JButton();
+        loadButton=new JButton();
        findButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\findIcon.png"));
        addButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\addIcon.png"));
        deleteButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\delete.png"));
-
-       leftButton = new JButton();
-       rightButton = new JButton();
-       leftButtonToEnd = new JButton();
-       rightButtonToEnd = new JButton();
-       leftButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\left.png"));
-       rightButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\right.png"));
-       leftButtonToEnd.setIcon(new ImageIcon("src\\com\\company\\resourses\\left_1.png"));
-       rightButtonToEnd.setIcon(new ImageIcon("src\\com\\company\\resourses\\right_1.png"));
-
+       saveButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\save.png"));
+       loadButton.setIcon(new ImageIcon("src\\com\\company\\resourses\\load.png"));
        creatingTolbar();
+       creatingMenu();
        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    }
 
@@ -64,7 +64,7 @@ public class View {
     }
 
     private void creatingTolbar() {
-        JToolBar toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
+        final JToolBar toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
         findButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 new FindView(dataBaseManipulation);
@@ -77,59 +77,112 @@ public class View {
         });
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) { new DeleteView(dataBaseManipulation);
-            table.renderTable(studentBase.getStudents());
+            renderTable();
+            }
+        });
+        saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                studentBase.saveStudentBase();
+
+            }
+        });
+        loadButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                studentBase.readStudentBase();
+                pageManipulator.setStudentArrayList(studentBase.getStudents());
+                toolbarForTableControl.setPageManipulator(pageManipulator);
+                renderTable();
             }
         });
         toolbar.add(addButton);
         toolbar.add(findButton);
         toolbar.add(deleteButton);
-        jFrame.getContentPane().setLayout(null);
+        toolbar.add(saveButton);
+        toolbar.add(loadButton);
+
         toolbar.setBounds(0,0,1600,50);
         jFrame.add(toolbar);
-        renderTable();
         jFrame.update(jFrame.getGraphics());
-        JToolBar jToolBarSecond = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
-        leftButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
 
-            }
-        });
-        rightButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
-        rightButtonToEnd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
-        leftButtonToEnd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-
-            }
-        });
-
-        jToolBarSecond.add(leftButtonToEnd);
-        jToolBarSecond.add(leftButton);
-        jToolBarSecond.add(rightButton);
-        jToolBarSecond.add(rightButtonToEnd);
         jFrame.getContentPane().setLayout(null);
         toolbar.setBounds(0,0,1600,50);
-        jToolBarSecond.setBounds(800,800,1600,30);
         jFrame.add(toolbar);
-        jFrame.add(jToolBarSecond);
-        renderTable();
         jFrame.update(jFrame.getGraphics());
         //jFrame.getContentPane().setLayout(null);
     }
+    private void creatingMenu(){
+        JMenuBar menuBar = new JMenuBar();
+        jFrame.setJMenuBar(menuBar);
+        JMenu fileMenu = new JMenu("Файл");
+        menuBar.add(fileMenu);
+        fileMenu.add(new JMenuItem(new AbstractAction("Сохранить как...") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                saveButton.doClick();
+            }
+        }));
+        fileMenu.add(new JMenuItem(new AbstractAction("Загрузить") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                loadButton.doClick();
+            }
+        }));
 
+        JMenu dataBase = new JMenu("База студентов");
+        menuBar.add(dataBase);
+        dataBase.add(new JMenuItem(new AbstractAction("Добавить") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                addButton.doClick();
+            }
+        }));
+        dataBase.add(new JMenuItem(new AbstractAction("Удалить") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            deleteButton.doClick();
+            }
+        }));
+        dataBase.add(new JMenuItem(new AbstractAction("Поиск") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                findButton.doClick();
+            }
+        }));
 
+        JMenu table = new JMenu("Таблица");
+        menuBar.add(table);
+        dataBase.add(new JMenuItem(new AbstractAction("Следующая страница") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+            toolbarForTableControl.getRightButton().doClick();
+            }
+        }));
+        table.add(new JMenuItem(new AbstractAction("Предыдущая страница") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                toolbarForTableControl.getLeftButton().doClick();
+            }
+        }));
+        table.add(new JMenuItem(new AbstractAction("Первая страница") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                toolbarForTableControl.getLeftButtonToEnd().doClick();
+            }
+        }));
+        table.add(new JMenuItem(new AbstractAction("Последняя страница") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                toolbarForTableControl.getRightButtonToEnd().doClick();
+            }
+        }));
+        table.add(new JMenuItem(new AbstractAction("Изменить размер страницы") {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                toolbarForTableControl.getResizeButton().doClick();
+            }
+        }));
+    }
    public void renderTable(){
-       table.renderTable(studentBase.getStudents());
+        table.renderTable(pageManipulator.returnPageOfStudents());
     }
 }
