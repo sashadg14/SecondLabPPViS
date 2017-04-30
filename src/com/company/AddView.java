@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 11.04.2017.
@@ -22,7 +23,7 @@ public class AddView {
     TextField surNameField;
     TextField lastNameField;
     TextField groupField;
-    ArrayList<TextField> publicWorkFieldArray;
+    List<TextField> publicWorkFieldArray;
     DataBaseManipulation dataBaseManipulation;
     public AddView(DataBaseManipulation dataBaseManipulation){
         this.dataBaseManipulation=dataBaseManipulation;
@@ -100,7 +101,7 @@ public class AddView {
         return groupField;
     }
 
-    public ArrayList<TextField> getPublicWorkFieldArray() {
+    public List<TextField> getPublicWorkFieldArray() {
         return publicWorkFieldArray;
     }
 }

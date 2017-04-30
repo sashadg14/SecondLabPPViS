@@ -3,13 +3,14 @@ package com.company.model;
 import com.company.fileWorking.Parser;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 20.04.2017.
  */
 public class StudentBase {
-    private ArrayList<Student> students;
-    private ArrayList<Student> pageOfStudents;
+    private List<Student> students;
+    private List<Student> pageOfStudents;
     private int countOfLists;
     public StudentBase(){
         students = new ArrayList<Student>();
@@ -17,11 +18,11 @@ public class StudentBase {
     public void addStudent(Student student){
         students.add(student);
     }
-    public ArrayList<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
-    public void removeStudents(ArrayList<Student> studentArrayList){
-        students.removeAll(studentArrayList);
+    public void removeStudents(List<Student> studentList){
+        students.removeAll(studentList);
     }
     public void saveStudentBase()
     {

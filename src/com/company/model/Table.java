@@ -4,7 +4,8 @@ import com.company.ToolbarForTableControl;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by alex o n 11.04.2017.
@@ -30,7 +31,7 @@ public class Table {
         this.toolbarForTableControl = toolbarForTableControl;
     }
 
-    public void renderTable(ArrayList<Student> studentArrayList) {
+    public void renderTable(List<Student> studentArrayList) {
         for(Component component:componentArrayList){
             window.remove(component);
         }
@@ -75,7 +76,7 @@ public class Table {
 
     }
 
-   void createRow(Student student, ArrayList<Student> studentArrayList){
+   void createRow(Student student, List<Student> studentArrayList){
        JLabel name = new JLabel(" "+student.getFirstName()+" "+student.getMiddleName()+" "+student.getLastName());
        name.setBounds(0,90+(heigth*studentArrayList.indexOf(student)),widh,heigth);
        //System.out.println(name.getY()+"----");

@@ -89,7 +89,7 @@ public class View {
         loadButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
                 studentBase.readStudentBase();
-                pageManipulator.setStudentArrayList(studentBase.getStudents());
+                pageManipulator.setStudentList(studentBase.getStudents());
                 toolbarForTableControl.setPageManipulator(pageManipulator);
                 renderTable();
             }
