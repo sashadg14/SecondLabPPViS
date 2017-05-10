@@ -14,11 +14,12 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 23.04.2017.
  */public class Parser {
-    public void writeFile(ArrayList<Student> studentArrayList){
+    public void writeFile(List<Student> studentArrayList){
         try
         {
             DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -78,8 +79,8 @@ import java.util.ArrayList;
             te.printStackTrace();
         }
     }
-    public ArrayList<Student> readFromFile(){
-        ArrayList<Student> studentArrayList= new ArrayList<Student>();
+    public List<Student> readFromFile(){
+        List<Student> studentArrayList= new ArrayList<Student>();
         SAXParserFactory saxParserFactory = SAXParserFactory.newInstance();
         try {
             SAXParser saxParser = saxParserFactory.newSAXParser();

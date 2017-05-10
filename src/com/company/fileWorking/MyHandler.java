@@ -6,6 +6,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 23.04.2017.
@@ -13,8 +14,8 @@ import java.util.ArrayList;
 public class MyHandler extends DefaultHandler{
     String tempData;
     Student tempStudent;
-    ArrayList<Student> studentArrayList;
-    MyHandler(ArrayList<Student> studentArrayList){
+    List<Student> studentArrayList;
+    MyHandler(List<Student> studentArrayList){
         tempStudent=new Student();
         this.studentArrayList=studentArrayList;
     }

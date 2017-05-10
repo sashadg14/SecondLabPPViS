@@ -4,17 +4,18 @@ import com.company.model.Student;
 import com.company.model.Table;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 23.04.2017.
  */
 public class PageManipulator {
-    private ArrayList<Student> studentArrayList;
+    private List<Student> studentList;
     private int countOfStudentOnLists=5;
     private int noOfPage =0;
     private Table table;
-    public PageManipulator(ArrayList<Student> studentArrayList, Table table){
-        this.studentArrayList=studentArrayList;
+    public PageManipulator(List<Student> studentList, Table table){
+        this.studentList=studentList;
         this.table=table;
     }
     public void setCountOfStudentOnLists(int countOfStudentOnLists) {
@@ -25,18 +26,18 @@ public class PageManipulator {
         return countOfStudentOnLists;
     }
 
-    public void setStudentArrayList(ArrayList<Student> studentArrayList) {
-        this.studentArrayList = studentArrayList;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 
-    public ArrayList<Student> returnPageOfStudents(){
-        ArrayList<Student> pageOfStudents= new ArrayList<Student>();
-            for(int i = noOfPage *countOfStudentOnLists; i<(noOfPage +1)*countOfStudentOnLists&&i<studentArrayList.size(); i++)
-                pageOfStudents.add(studentArrayList.get(i));
+    public List<Student> returnPageOfStudents(){
+        List<Student> pageOfStudents= new ArrayList<Student>();
+            for(int i = noOfPage *countOfStudentOnLists; i<(noOfPage +1)*countOfStudentOnLists&&i<studentList.size(); i++)
+                pageOfStudents.add(studentList.get(i));
         return pageOfStudents;
     }
     public void NextPage() {
-        if (countOfStudentOnLists*(noOfPage +1)<studentArrayList.size())
+        if (countOfStudentOnLists*(noOfPage +1)<studentList.size())
         {   noOfPage++;
             table.renderTable(returnPageOfStudents());
         }
@@ -52,8 +53,8 @@ public class PageManipulator {
         table.renderTable(returnPageOfStudents());
     }
     public void LastPage(){
-        int countOfPages=(int)studentArrayList.size()/countOfStudentOnLists;
-        if (countOfStudentOnLists*(countOfPages)<studentArrayList.size())
+        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
+        if (countOfStudentOnLists*(countOfPages)<studentList.size())
         {   noOfPage =countOfPages;
        // System.out.println(countOfStudentOnLists*(countOfPages));
             table.renderTable(returnPageOfStudents());
@@ -62,16 +63,16 @@ public class PageManipulator {
             table.renderTable(returnPageOfStudents());}
     }
     public int getNoOfPage() {
-        int countOfPages=(int)studentArrayList.size()/countOfStudentOnLists;
+        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
         if (countOfStudentOnLists*(countOfPages)==0)
             return 0;
-        if (countOfStudentOnLists*(countOfPages)==studentArrayList.size())
+        if (countOfStudentOnLists*(countOfPages)==studentList.size())
             return noOfPage+1;
         else return noOfPage+1;
     }
     public int getCountOfPages(){
-        int countOfPages=(int)studentArrayList.size()/countOfStudentOnLists;
-        if (countOfStudentOnLists*(countOfPages)<studentArrayList.size())
+        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
+        if (countOfStudentOnLists*(countOfPages)<studentList.size())
         return countOfPages+1;
         else
             if(countOfPages!=0)

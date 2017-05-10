@@ -2,8 +2,6 @@ package com.company;
 
 import com.company.controllers.*;
 import com.company.listners.DeleteByNameAndGroupListener;
-import com.company.listners.DeleteByNameAndNumberOfWorkListener;
-import com.company.listners.DeleteByNameAndWorkListener;
 
 import javax.swing.*;
 
@@ -11,49 +9,22 @@ import javax.swing.*;
  * Created by alex o n 11.04.2017.
  */
 public class DeleteView {
-    JDialog jDialog;
-    int higthAligment=50;
-    int heigth=20;
-    int width=100;
-    JButton deleteButton1;
-    JButton deleteButton2;
-    JButton deleteButton3;
     DataBaseManipulation dataBaseManipulation;
+    FindView findView;
     public DeleteView(DataBaseManipulation dataBaseManipulation){
+        findView=new FindView(dataBaseManipulation);
         this.dataBaseManipulation=dataBaseManipulation;
-        jDialog=new JDialog();
-        createElementsOfWindow();
     }
-    void createElementsOfWindow() {
-        jDialog.getContentPane().setLayout(null);
-        jDialog.setVisible(true);
-        jDialog.setBounds(500, 250, 500, 500);
-        deleteButton1 = new JButton("Удаление по группе и фамилии");
-        deleteButton1.setBounds(20, higthAligment + 30, 300, 20);
-        jDialog.add(deleteButton1);
-        deleteButton2 = new JButton("Удаление по фамилии и работе");
-        deleteButton2.setBounds(20, higthAligment + 70, 300, 20);
-        jDialog.add(deleteButton2);
-        deleteButton3 = new JButton("Удаление по фамилии и количеству работ");
-        deleteButton3.setBounds(20, higthAligment + 110, 300, 20);
-        jDialog.add(deleteButton3);
-
-        deleteButton3.addActionListener(new DeleteByNameAndNumberOfWorkListener(this, dataBaseManipulation));
-        deleteButton2.addActionListener(new DeleteByNameAndWorkListener(this, dataBaseManipulation));
-        deleteButton1.addActionListener(new DeleteByNameAndGroupListener(this, dataBaseManipulation));
+    public JDialog getjDialog(){
+        return findView.getjDialog();
     }
-
-    public void removeBottons() {/**/
-        jDialog.remove(deleteButton1);
-        jDialog.remove(deleteButton2);
-        jDialog.remove(deleteButton3);
+    public void removeBottons(){}
+    void createElementsOfWindow(String string){
+        findView.createElementsOfWindow(string);
+        findView.getFindByNameAndGroupButton().removeActionListener(findView.getFindByNameAndGroupButton().getActionListeners()[0]);
+        findView.getFindByNameAndWorkButton().removeActionListener(findView.getFindByNameAndWorkButton().getActionListeners()[0]);
+        findView.getFindByNameNumberOfWorkButton().removeActionListener(findView.getFindByNameNumberOfWorkButton().getActionListeners()[0]);
+        findView.getFindByNameAndGroupButton().addActionListener(new DeleteByNameAndGroupListener(findView, dataBaseManipulation));
+        findView.getjDialog().update(findView.getjDialog().getGraphics());
     }
-
-    public JDialog getjDialog() {
-        return jDialog;
-    }
-
-
-
-
 }
