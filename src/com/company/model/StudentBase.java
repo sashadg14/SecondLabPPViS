@@ -10,8 +10,6 @@ import java.util.List;
  */
 public class StudentBase {
     private List<Student> students;
-    private List<Student> pageOfStudents;
-    private int countOfLists;
     public StudentBase(){
         students = new ArrayList<Student>();
     }
@@ -21,8 +19,9 @@ public class StudentBase {
     public List<Student> getStudents() {
         return students;
     }
-    public void removeStudents(List<Student> studentList){
+    public int removeStudents(List<Student> studentList){
         students.removeAll(studentList);
+        return studentList.size();
     }
     public void saveStudentBase()
     {

@@ -18,6 +18,10 @@ public class PageManipulator {
         this.studentList=studentList;
         this.table=table;
     }
+    public PageManipulator(Table table){
+        studentList=new ArrayList<>();
+        this.table=table;
+    }
     public void setCountOfStudentOnLists(int countOfStudentOnLists) {
         this.countOfStudentOnLists = countOfStudentOnLists;
         noOfPage=0;
@@ -53,7 +57,7 @@ public class PageManipulator {
         table.renderTable(returnPageOfStudents());
     }
     public void LastPage(){
-        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
+        int countOfPages= studentList.size() /countOfStudentOnLists;
         if (countOfStudentOnLists*(countOfPages)<studentList.size())
         {   noOfPage =countOfPages;
        // System.out.println(countOfStudentOnLists*(countOfPages));
@@ -63,7 +67,7 @@ public class PageManipulator {
             table.renderTable(returnPageOfStudents());}
     }
     public int getNoOfPage() {
-        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
+        int countOfPages= studentList.size() /countOfStudentOnLists;
         if (countOfStudentOnLists*(countOfPages)==0)
             return 0;
         if (countOfStudentOnLists*(countOfPages)==studentList.size())
@@ -71,7 +75,7 @@ public class PageManipulator {
         else return noOfPage+1;
     }
     public int getCountOfPages(){
-        int countOfPages=(int)studentList.size()/countOfStudentOnLists;
+        int countOfPages= studentList.size() /countOfStudentOnLists;
         if (countOfStudentOnLists*(countOfPages)<studentList.size())
         return countOfPages+1;
         else

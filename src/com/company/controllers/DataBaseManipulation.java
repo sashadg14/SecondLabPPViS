@@ -41,6 +41,12 @@ public class DataBaseManipulation {
             {
                 findStudentArrayList.add(student);
             }
+            else if(group.equalsIgnoreCase("")&&student.getFirstName().equalsIgnoreCase(name)){
+                findStudentArrayList.add(student);
+            }
+            else if(student.getGroup().equalsIgnoreCase(group)&&name.equalsIgnoreCase("")){
+                findStudentArrayList.add(student);
+            }
         }
         return  findStudentArrayList;
     }
@@ -48,7 +54,7 @@ public class DataBaseManipulation {
     public ArrayList<Student> findStudentByNameAndWork(String name, String studWork){
         ArrayList<Student> findStudentArrayList = new ArrayList<Student>();
         for(Student student: studentBase.getStudents()){
-            if(student.getFirstName().equalsIgnoreCase(name))
+            if(student.getFirstName().equalsIgnoreCase(name)||name.equalsIgnoreCase(""))
             {
                 for(String work:student.getPublicWork()){
                     if(work.equalsIgnoreCase(studWork)){
@@ -56,6 +62,8 @@ public class DataBaseManipulation {
                     break;
                     }
                 }
+            } else if (studWork.equalsIgnoreCase("")&&student.getFirstName().equalsIgnoreCase(name)){
+                findStudentArrayList.add(student);
             }
         }
         return  findStudentArrayList;
@@ -64,9 +72,8 @@ public class DataBaseManipulation {
     public ArrayList<Student> findStudentByNameAndNumberOfWork(String name, String lowerLimit, String upperLimit){
         ArrayList<Student> findStudentArrayList = new ArrayList<Student>();
         for(Student student: studentBase.getStudents()){
-            if(student.getFirstName().equalsIgnoreCase(name))
-            {int coll=0;
-                    ArrayList<String> workMassiv=new ArrayList<>();
+            if(student.getFirstName().equalsIgnoreCase(name)||name.equalsIgnoreCase(""))
+            {   ArrayList<String> workMassiv=new ArrayList<>();
                 for(String string:student.getPublicWork())
                 {   boolean bool=false;
                     for(String string2:workMassiv){
@@ -79,21 +86,26 @@ public class DataBaseManipulation {
                 ///System.out.println(workMassiv.size());
                 if(workMassiv.size()-1>=Integer.parseInt(lowerLimit)&&workMassiv.size()-1<=Integer.parseInt(upperLimit))
                     findStudentArrayList.add(student);
+            }else if (lowerLimit.equalsIgnoreCase("")&&upperLimit.equalsIgnoreCase("")&&student.getFirstName().equalsIgnoreCase(name)){
+                findStudentArrayList.add(student);
             }
         }
         return  findStudentArrayList;
     }
-    public void deleteStudentByNameAndGrop(String name, String group){
-        studentBase.removeStudents(findStudentByNameAndGrop(name,group));
+    public int deleteStudentByNameAndGrop(String name, String group){
+        int coll=studentBase.removeStudents(findStudentByNameAndGrop(name,group));
         view.renderTable();
+        return coll;
     }
-    public void deleteStudentByNameAndWork(String name, String group){
-        studentBase.removeStudents(findStudentByNameAndWork(name,group));
+    public int deleteStudentByNameAndWork(String name, String group){
+        int coll=studentBase.removeStudents(findStudentByNameAndWork(name,group));
         view.renderTable();
+        return coll;
     }
-    public void deleteStudentByNameAndNumberOfWork(String name, String lowerLimit,String upperLimit){
-        studentBase.removeStudents(findStudentByNameAndNumberOfWork(name,lowerLimit,upperLimit));
+    public int deleteStudentByNameAndNumberOfWork(String name, String lowerLimit,String upperLimit){
+        int coll=studentBase.removeStudents(findStudentByNameAndNumberOfWork(name,lowerLimit,upperLimit));
         view.renderTable();
+        return coll;
     }
 
 }

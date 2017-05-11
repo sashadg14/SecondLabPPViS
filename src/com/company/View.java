@@ -67,7 +67,7 @@ public class View {
         final JToolBar toolbar = new JToolBar("Toolbar", JToolBar.HORIZONTAL);
         findButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                new FindView(dataBaseManipulation).createElementsOfWindow("Поиск");
+                new FindView(dataBaseManipulation).createFindWindow();
             }
         });
         addButton.addActionListener(new ActionListener() {
@@ -77,8 +77,8 @@ public class View {
         });
         deleteButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
-                new DeleteView(dataBaseManipulation).createElementsOfWindow("Удаление");
-            renderTable();
+                new DeleteView(dataBaseManipulation).createDeleteWindow();
+                renderTable();
             }
         });
         saveButton.addActionListener(new ActionListener() {

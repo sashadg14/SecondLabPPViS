@@ -1,6 +1,7 @@
 package com.company.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alex o n 11.04.2017.
@@ -10,7 +11,7 @@ public class Student {
     String lastName="";
     String middleName="";
     String group="";
-    ArrayList<String> publicWork;
+    List<String> publicWork;
 
     public Student(){
         publicWork=new ArrayList<String>();
@@ -54,7 +55,7 @@ public class Student {
         return middleName;
     }
 
-    public ArrayList<String> getPublicWork() {
+    public List<String> getPublicWork() {
         return publicWork;
     }
 

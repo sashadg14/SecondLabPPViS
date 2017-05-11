@@ -15,16 +15,14 @@ import java.util.List;
  * Created by alex o n 11.04.2017.
  */
 public class AddView {
-    JDialog jDialog;
-    int leftAligment=200;
-    int heigth=20;
-    int width=100;
-    TextField fistNameField;
-    TextField surNameField;
-    TextField lastNameField;
-    TextField groupField;
-    List<TextField> publicWorkFieldArray;
-    DataBaseManipulation dataBaseManipulation;
+    private JDialog jDialog;
+
+    private TextField fistNameField;
+    private TextField surNameField;
+    private TextField lastNameField;
+    private TextField groupField;
+    private List<TextField> publicWorkFieldArray;
+    private DataBaseManipulation dataBaseManipulation;
     public AddView(DataBaseManipulation dataBaseManipulation){
         this.dataBaseManipulation=dataBaseManipulation;
         jDialog=new JDialog();
@@ -35,6 +33,9 @@ public class AddView {
         createElementsOfWindow();
     }
     void createElementsOfWindow(){
+        int leftAligment=200;
+        int heigth=20;
+        int width=100;
         fistNameField = new TextField();
         fistNameField.setBounds(leftAligment,0,width,heigth);
         jDialog.add(fistNameField);
@@ -55,13 +56,13 @@ public class AddView {
             jLabel.setBounds(50,(int) (heigth*(7.5+1.5*i)),80,heigth);
             jDialog.add(jLabel);
         }
-        JLabel firstName = new JLabel("Фамилия");
+        final JLabel firstName = new JLabel("Фамилия");
         firstName.setBounds(50,0,100,20);
         jDialog.add(firstName);
-        JLabel secondName = new JLabel("Имя(инициалы)");
+        final JLabel secondName = new JLabel("Имя(инициалы)");
         secondName.setBounds(50,(int) (heigth*1.5),100,20);
         jDialog.add(secondName);
-        JLabel lastName = new JLabel("Отчество(инициалы)");
+        final JLabel lastName = new JLabel("Отчество(инициалы)");
         lastName.setBounds(50, heigth*3,150,20);
         jDialog.add(lastName);
         JLabel group = new JLabel("группа");
@@ -75,9 +76,12 @@ public class AddView {
         jButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-            dataBaseManipulation.AddNewStudentInBase(AddView.this);
-
-            jDialog.setVisible(false);
+                if(!fistNameField.getText().equalsIgnoreCase("")&&!surNameField.getText().equalsIgnoreCase("")&&!lastNameField.getText().equalsIgnoreCase("")&&!groupField.getText().equalsIgnoreCase("")){
+                dataBaseManipulation.AddNewStudentInBase(AddView.this);
+                jDialog.setVisible(false);
+                }else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Заполните поля!");
+                }
             }
         });
         jDialog.add(jButton);
